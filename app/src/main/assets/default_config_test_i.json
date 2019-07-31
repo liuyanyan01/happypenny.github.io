@@ -1,0 +1,22 @@
+{
+  "admob_app_id": "ca-app-pub-3940256099942544~3347511713",
+  "inmobi_account_id":"4db43ff640b745a7a4d56f10b1f56210",
+  "config": [
+    {
+      "m_pid": "f50ea4b479bc58dad3bd6c92bff72145",
+      "ad_type": "native",
+      "default": {
+        "ad_source": "Inmobi",
+        "placement_id": "1564240564078"
+      }
+    },
+    {
+      "m_pid": "2bc9a354762340bae25a117a89c6ba88",
+      "ad_type": "interstitial",
+      "default": {
+        "ad_source": "Inmobi",
+        "placement_id": "1564265658961"
+      }
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Mediation SDK Demo</string>
+
+    <string name="native_main_image">native_main_image</string>
+
+    <string-array name="ad_ids">
+        <item>直接下载类广告</item>
+        <item>打开落地页广告</item>
+    </string-array>
+</resources>

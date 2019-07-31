@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/big_ad"
+    style="@style/AdTopic"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/fb_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:id="@+id/card_icon"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="14dp"
+            android:contentDescription="@null"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:id="@+id/card_name"
+            style="@style/ADCardName"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginRight="13dp"
+            android:layout_toRightOf="@id/card_icon" />
+
+        <RatingBar
+            android:id="@+id/card_rating"
+            style="@style/ADRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="13dp"
+            android:layout_below="@id/card_name"
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="13dp"
+            android:layout_toRightOf="@id/card_icon"
+            android:isIndicator="true"
+            android:numStars="5" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/fb_image"
+        android:layout_width="match_parent"
+        android:layout_height="175dp"
+        android:layout_below="@id/fb_header"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/card_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/card__des"
+            style="@style/ADDescription"
+            android:layout_gravity="bottom"
+            android:background="@drawable/fb_banner_bg"
+            android:gravity="center_vertical"
+            android:paddingLeft="14dp"
+            android:paddingTop="10dp"
+            android:paddingRight="14dp"
+            android:paddingBottom="8dp" />
+
+        <ImageView
+            android:id="@+id/card_label"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/v2_facebook_card_badge" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/card_btn"
+        style="@style/ADCardFreeBtn"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_below="@id/fb_image"
+        android:layout_centerHorizontal="true"
+        android:gravity="center" />
+</RelativeLayout>

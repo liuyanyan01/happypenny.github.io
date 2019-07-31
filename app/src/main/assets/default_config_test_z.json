@@ -1,0 +1,22 @@
+{
+  "admob_app_id": "12345678901234567890123456789012",
+  "inmobi_account_id":"ff923f527bb9451ca0023bc8e4104aeb",
+  "config": [
+    {
+      "m_pid": "f50ea4b479bc58dad3bd6c92bff72145",
+      "ad_type": "native",
+      "default": {
+        "ad_source": "Zhixuan",
+        "placement_id": "e8d685b3ea2eef3fbaa31f0d12d7c63e"
+      }
+    },
+    {
+      "m_pid": "2bc9a354762340bae25a117a89c6ba88",
+      "ad_type": "interstitial",
+      "default": {
+        "ad_source": "Zhixuan",
+        "placement_id": "e8d685b3ea2eef3fbaa31f0d12d7c63e"
+      }
+    }
+  ]
+}
