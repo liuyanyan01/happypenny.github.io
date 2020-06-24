@@ -6,7 +6,7 @@
 
 聚合sdk定义：可以聚合多方广告SDK，协调各广告位中的广告请求、展现等逻辑，使得多个SDK可以在一个广告位正常运作起来。
 
-有道聚合SDK为海外app服务，提供了一种便捷的方式可以快速接入多家广告平台。目前聚合sdk集成了五种广告平台分别为Facebook、Admob、百度、有道智选、Inmobi、头条。
+有道聚合SDK为海外app服务，提供了一种便捷的方式可以快速接入多家广告平台。目前聚合SDK集成了五种广告平台分别为Facebook、Admob、百度、有道智选、Inmobi、头条。
 
 在移动广告开发者管理系统中提供聚合平台入口，平台中可以设置广告策略，聚合SDK根据配置的广告策略拉取各个广告平台的广告，提供给app最终可供展示的广告对象。
 
@@ -363,158 +363,142 @@ loadAd时必须设置YoudaoAdLoadListener，且不能为null，否则无法加�
 
 ::
 
-  //配置渲染render对象
-  ZhixuanNativeAdRender adRender = new ZhixuanNativeAdRender(
-                new ViewBinder.Builder(R.layout.zhixuan_native_ad)
-                        .titleId(R.id.native_title)
-                        .textId(R.id.native_text)
-                        .mainImageId(R.id.native_main_image)
-                        .iconImageId(R.id.native_icon_image).build(), false);
-  //通过render对象创建View
-  View adView = adRender.createAdView(getActivity(), mNativeAdContainer);
+        //配置渲染render对象
+        ZhixuanNativeAdRender adRender = new ZhixuanNativeAdRender(new ViewBinder.Builder(R.layout.zhixuan_native_ad)
+                .titleId(R.id.native_title)
+                .textId(R.id.native_text)
+                .mainImageId(R.id.native_main_image)
+                .iconImageId(R.id.native_icon_image).build(), false);
+        //通过render对象创建View
+        View adView = adRender.createAdView(this, mNativeAdContainer);
 
-  //把广告view加载到container中
-  mNativeAdContainer.removeAllViews();
-  mNativeAdContainer.addView(adView);
-
-  //调用渲染方法
-  adRender.renderAdView(adView, ad.getNativeAd());
-
-  //注册点击事件
-  adRender.registerViewForInteraction(adView, new int[]{R.id.native_main_image}, ad.getNativeAd());
-
-  //调用展示上报
-  ad.recordImpression(adView);
+        //把广告view加载到container中
+        mNativeAdContainer.removeAllViews();
+        mNativeAdContainer.addView(adView);
+        //调用渲染方法
+        adRender.renderAdView(adView, ad.getNativeAd());
+        //注册点击事件
+        adRender.registerViewForInteraction(adView, new int[]{R.id.native_main_image}, ad.getNativeAd());
+        //调用展示上报
+        ad.recordImpression(adView);
 
 （2）百度广告自动渲染
 
 ::
 
-  //配置渲染render对象
-  BaiduNativeAdRender adRender = new BaiduNativeAdRender(
-                      new BaiduViewBinder.Builder(R.layout.baidu_big_ad_card)
-                              .setTitleViewId(R.id.card_name)
-                              .setIconViewId(R.id.card_icon)
-                              .setStarRatingViewId(R.id.card_rating)
-                              .setShortDescViewId(R.id.card__des)
-                              .setCallToActionViewId(R.id.card_btn)
-                              .setImageViewId(R.id.card_image)
-                              .build()
+        //配置渲染render对象
+        BaiduNativeAdRender adRender = new BaiduNativeAdRender(BaiduNativeViewBinder.builder()
+                    //layoutId为必选项
+                    .layoutId(R.layout.baidu_small_ad_card)
+                    .titleId(R.id.small_card_name)
+                    .iconViewId(R.id.small_card_icon)
+                    .starRatingViewId(R.id.small_card_rating)
+                    .shortDescViewId(R.id.small_card__des)
+                    .callToActionViewId(R.id.small_card_btn)
+                    .build());
+        //通过render对象创建View
+        View adView = adRender.createAdView(this, mNativeAdContainer);
 
-  //通过render对象创建View
-  View adView = adRender.createAdView(getActivity(), mNativeAdContainer);
+        //把广告view加载到container中
+        mNativeAdContainer.removeAllViews();
+        mNativeAdContainer.addView(adView);
 
-  //把广告view加载到container中
-  mNativeAdContainer.removeAllViews();
-  mNativeAdContainer.addView(adView);
-
-  //调用渲染方法
-  adRender.renderAdView(adView, ad.getNativeAd());
-
-  //注册点击事件
-  adRender.registerViewForInteraction(adView, ad.getNativeAd());
-
-  //调用展示上报
-  ad.recordImpression(adView);
+        //调用渲染方法
+        adRender.renderAdView(adView, ad.getNativeAd());
+        //注册点击事件
+        adRender.registerViewForInteraction(adView, ad.getNativeAd());
+        //调用展示上报
+        ad.recordImpression(adView);
 
 （3）admob广告自动渲染
 
 ::
 
-  //配置渲染render对象
-  AdmobNativeAdRender adRender = new AdmobNativeAdRender(
-                  new AdmobViewBinder.Builder(R.layout.admob_ad_unified)
-                          .setMediaViewId(R.id.ad_media)
-                          .setHeadlineViewId(R.id.ad_headline)
-                          .setBodyViewId(R.id.ad_body)
-                          .setCallToActionViewId(R.id.ad_call_to_action)
-                          .setIconViewId(R.id.ad_app_icon)
-                          .setPriceViewId(R.id.ad_price)
-                          .setStarRatingViewId(R.id.ad_stars)
-                          .setStoreViewId(R.id.ad_store)
-                          .setAdvertiserViewId(R.id.ad_advertiser)
-                          .build()
-          );
+        //配置渲染render对象
+        AdmobNativeAdRender adRender = new AdmobNativeAdRender(AdmobNativeViewBinder.builder()
+                //layoutId为必选项
+                .layoutId(R.layout.admob_ad_unified)
+                .mediaViewId(R.id.ad_media)
+                .headlineViewId(R.id.ad_headline)
+                .bodyViewId(R.id.ad_body)
+                .callToActionViewId(R.id.ad_call_to_action)
+                .iconViewId(R.id.ad_app_icon)
+                .priceViewId(R.id.ad_price)
+                .starRatingViewId(R.id.ad_stars)
+                .storeViewId(R.id.ad_store)
+                .advertiserViewId(R.id.ad_advertiser)
+                .build());
+        //通过render对象创建View
+        View adView = adRender.createAdView(this, mNativeAdContainer);
 
-  //通过render对象创建View
-  View adView = adRender.createAdView(getActivity(), mNativeAdContainer);
+        //把广告view加载到container中
+        mNativeAdContainer.removeAllViews();
+        mNativeAdContainer.addView(adView);
 
-  //把广告view加载到container中
-  mNativeAdContainer.removeAllViews();
-  mNativeAdContainer.addView(adView);
-
-  //调用渲染方法
-  adRender.renderAdView(adView, ad.getNativeAd());
-
-  //调用展示上报
-  ad.recordImpression(adView);
+        //调用渲染方法
+        adRender.renderAdView(adView, ad.getNativeAd());
+        //调用展示上报
+        ad.recordImpression(adView);
 
 （4）facebook广告自动渲染
 
 ::
 
-  //配置渲染render对象
-  AdmobNativeAdRender adRender = new AdmobNativeAdRender(
-                new AdmobViewBinder.Builder(R.layout.admob_ad_unified)
-                        .setMediaViewId(R.id.ad_media)
-                        .setHeadlineViewId(R.id.ad_headline)
-                        .setBodyViewId(R.id.ad_body)
-                        .setCallToActionViewId(R.id.ad_call_to_action)
-                        .setIconViewId(R.id.ad_app_icon)
-                        .setPriceViewId(R.id.ad_price)
-                        .setStarRatingViewId(R.id.ad_stars)
-                        .setStoreViewId(R.id.ad_store)
-                        .setAdvertiserViewId(R.id.ad_advertiser)
-                        .build()
-        );
+        //配置渲染render对象
+        FacebookNativeAdRender adRender = new FacebookNativeAdRender(FacebookNativeViewBinder.builder()
+                //layoutId为必选项
+                .layoutId(R.layout.facebook_native_ad_unit)
+                .adChoicesContainerId(R.id.ad_choices_container)
+                .bodyViewId(R.id.native_ad_body)
+                .callToActionViewId(R.id.native_ad_call_to_action)
+                .iconViewId(R.id.native_ad_icon)
+                .mediaViewId(R.id.native_ad_media)
+                .socialContextViewId(R.id.native_ad_social_context)
+                .titleId(R.id.native_ad_title)
+                .sponsoredLabelViewId(R.id.native_ad_sponsored_label)
+                .build());
+        //通过render对象创建View
+        View adView = adRender.createAdView(this, mNativeAdContainer);
 
-  //通过render对象创建View
-  View adView = adRender.createAdView(getActivity(), mNativeAdContainer);
+        //把广告view加载到container中
+        mNativeAdContainer.removeAllViews();
+        mNativeAdContainer.addView(adView);
 
-  //把广告view加载到container中
-  mNativeAdContainer.removeAllViews();
-  mNativeAdContainer.addView(adView);
-
-  //调用渲染方法
-  adRender.renderAdView(adView, ad.getNativeAd());
-
-  //注册点击事件
-  adRender.registerViewForInteraction(adView, R.id.native_ad_media, R.id.native_ad_icon, new int[]{R.id.native_ad_title, R.id.native_ad_call_to_action}, ad.getNativeAd());
-
-  //调用展示上报
-  ad.recordImpression(adView);
+        //调用渲染方法
+        adRender.renderAdView(adView, ad.getNativeAd());
+        //注册点击事件
+        adRender.registerViewForInteraction(adView, R.id.native_ad_media, R.id.native_ad_icon, new int[]{R.id.native_ad_title, R.id.native_ad_call_to_action}, ad.getNativeAd());
+        //调用展示上报
+        ad.recordImpression(adView);
 
 （5）inmobi广告自动渲染
 
 ::
 
-  //配置渲染render对象
-  InMobiNativeAdRender adRender = new InMobiNativeAdRender(
-                    new InMobiViewBinder.Builder(R.layout.inmobi_native_ad)
-                            .setCallToActionViewId(R.id.adAction)
-                            .setDescriptionViewId(R.id.adDescription)
-                            .setIconViewId(R.id.adIcon)
-                            .setRatingViewId(R.id.adRating)
-                            .setTitleViewId(R.id.adTitle)
-                            .setPrimaryViewId(R.id.adContent)
-                            .build()
-            );
+        //配置渲染render对象
+        InMobiNativeAdRender adRender = new InMobiNativeAdRender(InMobiNativeViewBinder.builder()
+                //layoutId为必选项
+                .layoutId(R.layout.inmobi_native_ad)
+                .callToActionViewId(R.id.adAction)
+                .descriptionViewId(R.id.adDescription)
+                .iconViewId(R.id.adIcon)
+                .ratingViewId(R.id.adRating)
+                .titleViewId(R.id.adTitle)
+                .primaryViewId(R.id.adContent)
+                .build());
+        //通过render对象创建View
+        View adView = adRender.createAdView(this, mNativeAdContainer);
 
-  //通过render对象创建View
-  View adView = adRender.createAdView(getActivity(), mNativeAdContainer);
+        //把广告view加载到container中
+        mNativeAdContainer.removeAllViews();
+        mNativeAdContainer.addView(adView);
 
-  //把广告view加载到container中
-  mNativeAdContainer.removeAllViews();
-  mNativeAdContainer.addView(adView);
-
-  //调用渲染方法
-  adRender.renderAdView(adView, ad.getNativeAd());
-
-  //设置点击事件
-  adRender.registerViewForInteraction(adView, new int[]{R.id.adAction}, ad.getNativeAd());
-
-  //调用展示上报
-  ad.recordImpression(adView);
+        //调用渲染方法
+        adRender.renderAdView(adView, ad.getNativeAd());
+        //设置点击事件
+        adRender.registerViewForInteraction(adView, new int[]{R.id.adAction}, ad.getNativeAd());
+        //调用展示上报
+        ad.recordImpression(adView);
 
 广告展示上报
 -------------
