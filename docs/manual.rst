@@ -6,7 +6,7 @@
 
 聚合sdk定义：可以聚合多方广告SDK，协调各广告位中的广告请求、展现等逻辑，使得多个SDK可以在一个广告位正常运作起来。
 
-有道聚合SDK为海外app服务，提供了一种便捷的方式可以快速接入多家广告平台。目前聚合SDK集成了五种广告平台分别为Facebook、Admob、百度、有道智选、Inmobi、头条。
+有道聚合SDK为海外app服务，提供了一种便捷的方式可以快速接入多家广告平台。目前聚合SDK集成了五种广告平台分别为Facebook、Admob、百度、有道智选、Inmobi、穿山甲。
 
 在移动广告开发者管理系统中提供聚合平台入口，平台中可以设置广告策略，聚合SDK根据配置的广告策略拉取各个广告平台的广告，提供给app最终可供展示的广告对象。
 
@@ -63,7 +63,7 @@ gradle中增加对应的依赖包，需要依赖聚合SDK包，和需要的平�
    implementation files('libs/DuappsAd-CW-1.2.7.4-release.aar')
    implementation files('libs/DuVideoSdk-v1.1.0-release.aar')
 
-   //头条adapter包，集成头条广告则依赖下面包，反之不用依赖
+   //穿山甲adapter包，集成穿山甲广告则依赖下面包，反之不用依赖
    implementation 'com.youdao.sdk:mediation-adapter-toutiao:2.5.3.1-SNAPSHOT'
    implementation files('libs/open_ad_sdk.aar')
 
@@ -375,6 +375,7 @@ loadAd时必须设置YoudaoAdLoadListener，且不能为null，否则无法加�
         //把广告view加载到container中
         mNativeAdContainer.removeAllViews();
         mNativeAdContainer.addView(adView);
+        
         //调用渲染方法
         adRender.renderAdView(adView, ad.getNativeAd());
         //注册点击事件
